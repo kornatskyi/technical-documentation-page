@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <nav id="navbar">
+      <header><h1>Regular expressions in JS</h1></header>
+        <a href="#Creating_a_regular_expression" class="nav-link">Creating a regular expression</a>
+        <a href="#Writing_a_regular_expression" class="nav-link"
+          >Writing a regular expression</a
+        >
+        <a href="#Using_regular_expressions_in_JavaScript" class="nav-link"
+          >Using regular expressions in JavaScript</a
+        >
+        <a href="#Examples" class="nav-link">Examples</a>
+        <a href="#HTML" class="nav-link">HTML</a>
+        <a href="#JavaScript" class="nav-link">JavaScript</a>
+
+    </nav>
+
+
+
+    <main id="main-doc">
+      <section class="main-section" id="Creating_a_regular_expression">
+        <header><h2>Creating a regular expression</h2></header>
+        <p>You construct a regular expression in one of two ways:</p>
+        <ul>
+          <li>
+            Using a regular expression literal, which consists of a pattern
+            enclosed between slashes, as follows:
+          </li>
+          <code>let re = /ab+c/;</code>
+          <p>
+            Regular expression literals provide compilation of the regular
+            expression when the script is loaded. If the regular expression
+            remains constant, using this can improve performance.
+          </p>
+          <li>
+            Or calling the constructor function of the RegExp object, as
+            follows:
+          </li>
+          <code>let re = new RegExp('ab+c');</code>
+        </ul>
+        <p>
+          Using the constructor function provides runtime compilation of the
+          regular expression. Use the constructor function when you know the
+          regular expression pattern will be changing, or you don't know the
+          pattern and are getting it from another source, such as user input.
+        </p>
+      </section>
+      <section class="main-section" id="Writing_a_regular_expression">
+        <header><h2>Writing a regular expression</h2></header>
+        <p>
+          A regular expression pattern is composed of simple characters, such as
+          /abc/, or a combination of simple and special characters, such as
+          /ab*c/ or /Chapter (\d+)\.\d*/. The last example includes parentheses,
+          which are used as a memory device. The match made with this part of
+          the pattern is remembered for later use, as described in Using groups.
+        </p>
+        <h3>Using simple patterns</h3>
+
+        <p>
+          Simple patterns are constructed of characters for which you want to
+          find a direct match. For example, the pattern /abc/ matches character
+          combinations in strings only when the exact sequence "abc" occurs (all
+          characters together and in that order). Such a match would succeed in
+          the strings "Hi, do you know your abc's?" and "The latest airplane
+          designs evolved from slabcraft." In both cases the match is with the
+          substring "abc". There is no match in the string "Grab crab" because
+          while it contains the substring "ab c", it does not contain the exact
+          substring "abc".
+        </p>
+        <h3>Using special characters</h3>
+        <p>
+          When the search for a match requires something more than a direct
+          match, such as finding one or more b's, or finding white space, you
+          can include special characters in the pattern. For example, to match a
+          single "a" followed by zero or more "b"s followed by "c", you'd use
+          the pattern /ab*c/: the * after "b" means "0 or more occurrences of
+          the preceding item." In the string "cbbabbbbcdebc", this pattern will
+          match the substring "abbbbc".
+          <br />
+          The following pages provide lists of the different special characters
+          that fit into each category, along with descriptions and examples.
+          <br />
+        </p>
+        <ul>
+          <a
+            href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions/Assertions"
+            >Assertions</a
+          >
+          <p>
+            Assertions include boundaries, which indicate the beginnings and
+            endings of lines and words, and other patterns indicating in some
+            way that a match is possible (including look-ahead, look-behind, and
+            conditional expressions).
+          </p>
+          <a
+            href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions/Character_Classes"
+            >Character classes</a
+          >
+          <p>
+            Distinguish different types of characters. For example,
+            distinguishing between letters and digits.
+          </p>
+          <a
+            href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions/Groups_and_Ranges"
+            >Groups and ranges</a
+          >
+          <p>Indicate groups and ranges of expression characters.</p>
+          <a
+            href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions/Quantifiers"
+            >Quantifiers</a
+          >
+          <p>Indicate numbers of characters or expressions to match.</p>
+          <a
+            href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions/Unicode_Property_Escapes"
+            >Unicode property escapes</a
+          >
+          <p>
+            Distinguish based on unicode character properties, for example,
+            upper- and lower-case letters, math symbols, and punctuation.
+          </p>
+        </ul>
+
+        <p>
+          If you want to look at all the special characters that can be used in
+          regular expressions in a single table, see the following:
+        </p>
+
+        <table class="standard-table">
+          <caption>
+            Special characters in regular expressions.
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">Characters / constructs</th>
+              <th scope="col">Corresponding article</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <code>\</code>, <code>.</code>, <code>\cX</code>,
+                <code>\d</code>, <code>\D</code>, <code>\f</code>,
+                <code>\n</code>, <code>\r</code>, <code>\s</code>,
+                <code>\S</code>, <code>\t</code>, <code>\v</code>,
+                <code>\w</code>, <code>\W</code>, <code>\0</code>,
+                <code>\xhh</code>, <code>\uhhhh</code>, <code>\uhhhhh</code>,
+                <code>[\b]</code>
+              </td>
+              <td>
+                <p>
+                  <a
+                    href="/en-US/docs/Web/JavaScript/Guide/Regular_Expressions/Character_Classes"
+                    >Character classes</a
+                  >
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <code>^</code>, <code>$</code>, <code>x(?=y)</code>,
+                <code>x(?!y)</code>, <code>(?&lt;=y)x</code>,
+                <code>(?&lt;!y)x</code>, <code>\b</code>, <code>\B</code>
+              </td>
+              <td>
+                <p>
+                  <a
+                    href="/en-US/docs/Web/JavaScript/Guide/Regular_Expressions/Assertions"
+                    >Assertions</a
+                  >
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <code>(x)</code>, <code>(?:x)</code>,
+                <code>(?&lt;Name&gt;x)</code>,&nbsp;<code>x|y</code>,
+                <code>[xyz]</code>, <code>[^xyz]</code>,
+                <code>\<em>Number</em></code>
+              </td>
+              <td>
+                <p>
+                  <a
+                    href="/en-US/docs/Web/JavaScript/Guide/Regular_Expressions/Groups_and_Ranges"
+                    >Groups and ranges</a
+                  >
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <code>*</code>, <code>+</code>, <code>?</code>,
+                <code>x{<em>n</em>}</code>, <code>x{<em>n</em>,}</code>,
+                <code>x{<em>n</em>,<em>m</em>}</code>
+              </td>
+              <td>
+                <p>
+                  <a
+                    href="/en-US/docs/Web/JavaScript/Guide/Regular_Expressions/Quantifiers"
+                    >Quantifiers</a
+                  >
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <code>\p{<em>UnicodeProperty</em>}</code>,
+                <code>\P{<em>UnicodeProperty</em>}</code>
+              </td>
+              <td>
+                <a
+                  href="/en-US/docs/Web/JavaScript/Guide/Regular_Expressions/Unicode_Property_Escapes"
+                  >Unicode property escapes</a
+                >
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Escaping</h3>
+        <p>
+          If you need to use any of the special characters literally (actually
+          searching for a "*", for instance), you must escape it by putting a
+          backslash in front of it. For instance, to search for "a" followed by
+          "*" followed by "b", you'd use /a\*b/ — the backslash "escapes" the
+          "*", making it literal instead of special. <br /><br />
+
+          Similarly, if you're writing a regular expression literal and need to
+          match a slash ("/"), you need to escape that (otherwise, it terminates
+          the pattern). For instance, to search for the string "/example/"
+          followed by one or more alphabetic characters, you'd use
+          /\/example\/[a-z]+/i—the backslashes before each slash make them
+          literal.
+          <br /><br />
+
+          To match a literal backslash, you need to escape the backslash. For
+          instance, to match the string "C:\" where "C" can be any letter, you'd
+          use /[A-Z]:\\/ — the first backslash escapes the one after it, so the
+          expression searches for a single literal backslash.
+          <br /><br />
+          If using the RegExp constructor with a string literal, remember that
+          the backslash is an escape in string literals, so to use it in the
+          regular expression, you need to escape it at the string literal level.
+          /a\*b/ and new RegExp("a\\*b") create the same expression, which
+          searches for "a" followed by a literal "*" followed by "b".
+          <br /><br />
+          If escape strings are not already part of your pattern you can add
+          them using String.replace:
+        </p>
+
+        <code
+          >function escapeRegExp(string) { return
+          string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole
+          matched string }</code
+        >
+        <p>
+          The "g" after the regular expression is an option or flag that
+          performs a global search, looking in the whole string and returning
+          all matches. It is explained in detail below in Advanced Searching
+          With Flags. <br /><br />
+          Why isn't this built into JavaScript? There is a proposal to add such
+          a function to RegExp, but it was rejected by TC39.
+        </p>
+        <h3>Using parentheses</h3>
+        <p>
+          Parentheses around any part of the regular expression pattern causes
+          that part of the matched substring to be remembered. Once remembered,
+          the substring can be recalled for other use. See Groups and ranges for
+          more details./p>
+        </p>
+      </section>
+
+      <section class="main-section" id="Using_regular_expressions_in_JavaScript">
+        <header><h2>Using regular expressions in JavaScript</h2></header>
+        <p>
+          Regular expressions are used with the RegExp methods test() and exec()
+          and with the String methods match(), replace(), search(), and split().
+          These methods are explained in detail in the JavaScript reference.
+        </p>
+        <table class="standard-table">
+          <caption>
+            Methods that use regular expressions
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">Method</th>
+              <th scope="col">Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <a
+                  href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/exec"
+                  ><code>exec()</code></a
+                >
+              </td>
+              <td>
+                Executes a search for a match in a string. It returns an array
+                of information or <code>null</code> on a mismatch.
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <a
+                  href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/test"
+                  ><code>test()</code></a
+                >
+              </td>
+              <td>
+                Tests for a match in a string. It returns <code>true</code> or
+                <code>false</code>.
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <a
+                  href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match"
+                  ><code>match()</code></a
+                >
+              </td>
+              <td>
+                Returns an array containing all of the matches, including
+                capturing groups, or <code>null</code> if no match is found.
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <a
+                  href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/matchAll"
+                  ><code>matchAll()</code></a
+                >
+              </td>
+              <td>
+                Returns an iterator containing all of the matches, including
+                capturing groups.
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <a
+                  href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/search"
+                  ><code>search()</code></a
+                >
+              </td>
+              <td>
+                Tests for a match in a string. It returns the index of the
+                match, or <code>-1</code> if the search fails.
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <a
+                  href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace"
+                  ><code>replace()</code></a
+                >
+              </td>
+              <td>
+                Executes a search for a match in a string, and replaces the
+                matched substring with a replacement substring.
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <a
+                  href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replaceAll"
+                  ><code>replaceAll()</code></a
+                >
+              </td>
+              <td>
+                Executes a search for all matches in a string, and replaces the
+                matched substrings with a replacement substring.
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <a
+                  href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split"
+                  ><code>split()</code></a
+                >
+              </td>
+              <td>
+                Uses a regular expression or a fixed string to break a string
+                into an array of substrings.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>
+          When you want to know whether a pattern is found in a string, use the
+          test() or search() methods; for more information (but slower
+          execution) use the exec() or match() methods. If you use exec() or
+          match() and if the match succeeds, these methods return an array and
+          update properties of the associated regular expression object and also
+          of the predefined regular expression object, RegExp. If the match
+          fails, the exec() method returns null (which coerces to false).
+          <br /><br />
+          In the following example, the script uses the exec() method to find a
+          match in a string.
+        </p>
+        <code>var myRe = /d(b+)d/g; var myArray = myRe.exec('cdbbdbsbz');</code>
+        <p>
+          If you do not need to access the properties of the regular expression,
+          an alternative way of creating myArray is with this script:
+        </p>
+        <code
+          >var myArray = /d(b+)d/g.exec('cdbbdbsbz'); // similar to
+          "cdbbdbsbz".match(/d(b+)d/g); however, // "cdbbdbsbz".match(/d(b+)d/g)
+          outputs Array [ "dbbd" ], while // /d(b+)d/g.exec('cdbbdbsbz') outputs
+          Array [ 'dbbd', 'bb', index: 1, input: 'cdbbdbsbz' ].</code
+        >
+        <p>
+          (See different behaviors for further info about the different
+          behaviors.) <br /><br />
+          If you want to construct the regular expression from a string, yet
+          another alternative is this script:
+        </p>
+        '
+        <code
+          >var myRe = new RegExp('d(b+)d', 'g'); var myArray =
+          myRe.exec('cdbbdbsbz');</code
+        >
+        <p>
+          With these scripts, the match succeeds and returns the array and
+          updates the properties shown in the following table.
+        </p>
+        <table class="standard-table">
+          <caption>
+            Results of regular expression execution.
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">Object</th>
+              <th scope="col">Property or index</th>
+              <th scope="col">Description</th>
+              <th scope="col">In this example</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td rowspan="4"><code>myArray</code></td>
+              <td></td>
+              <td>The matched string and all remembered substrings.</td>
+              <td><code>['dbbd', 'bb', index: 1, input: 'cdbbdbsbz']</code></td>
+            </tr>
+            <tr>
+              <td><code>index</code></td>
+              <td>The 0-based index of the match in the input string.</td>
+              <td><code>1</code></td>
+            </tr>
+            <tr>
+              <td><code>input</code></td>
+              <td>The original string.</td>
+              <td><code>'cdbbdbsbz'</code></td>
+            </tr>
+            <tr>
+              <td><code>[0]</code></td>
+              <td>The last matched characters.</td>
+              <td><code>'dbbd'</code></td>
+            </tr>
+            <tr>
+              <td rowspan="2"><code>myRe</code></td>
+              <td><code>lastIndex</code></td>
+              <td>
+                The index at which to start the next match. (This property is
+                set only if the regular expression uses the g option, described
+                in
+                <a href="#advanced_searching_with_flags"
+                  >Advanced Searching With Flags</a
+                >.)
+              </td>
+              <td><code>5</code></td>
+            </tr>
+            <tr>
+              <td><code>source</code></td>
+              <td>
+                The text of the pattern. Updated at the time that the regular
+                expression is created, not executed.
+              </td>
+              <td><code>'d(b+)d'</code></td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          As shown in the second form of this example, you can use a regular
+          expression created with an object initializer without assigning it to
+          a variable. If you do, however, every occurrence is a new regular
+          expression. For this reason, if you use this form without assigning it
+          to a variable, you cannot subsequently access the properties of that
+          regular expression. For example, assume you have this script:
+        </p>
+        <code
+          >var myRe = /d(b+)d/g; var myArray = myRe.exec('cdbbdbsbz');
+          console.log('The value of lastIndex is ' + myRe.lastIndex); // "The
+          value of lastIndex is 5"</code
+        >
+        <p>However, if you have this script:</p>
+        <code
+          >var myArray = /d(b+)d/g.exec('cdbbdbsbz'); console.log('The value of
+          lastIndex is ' + /d(b+)d/g.lastIndex); // "The value of lastIndex is
+          0"</code
+        >
+        <p>
+          The occurrences of /d(b+)d/g in the two statements are different
+          regular expression objects and hence have different values for their
+          lastIndex property. If you need to access the properties of a regular
+          expression created with an object initializer, you should first assign
+          it to a variable.
+        </p>
+        <h3>Advanced searching with flags</h3>
+        <p>
+          Regular expressions have six optional flags that allow for
+          functionality like global and case insensitive searching. These flags
+          can be used separately or together in any order, and are included as
+          part of the regular expression.
+        </p>
+        <table class="standard-table">
+          <caption>
+            Regular expression flags
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">Flag</th>
+              <th scope="col">Description</th>
+              <th scope="col">Corresponding property</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>d</code></td>
+              <td>Generate indices for substring matches.</td>
+              <td>
+                <code
+                  ><a
+                    href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/hasIndices"
+                    >RegExp.prototype.hasIndices</a
+                  ></code
+                >
+              </td>
+            </tr>
+            <tr>
+              <td><code>g</code></td>
+              <td>Global search.</td>
+              <td>
+                <code
+                  ><a
+                    href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/global"
+                    >RegExp.prototype.global</a
+                  ></code
+                >
+              </td>
+            </tr>
+            <tr>
+              <td><code>i</code></td>
+              <td>Case-insensitive search.</td>
+              <td>
+                <code
+                  ><a
+                    href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/ignoreCase"
+                    >RegExp.prototype.ignoreCase</a
+                  ></code
+                >
+              </td>
+            </tr>
+            <tr>
+              <td><code>m</code></td>
+              <td>Multi-line search.</td>
+              <td>
+                <code
+                  ><a
+                    href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/multiline"
+                    >RegExp.prototype.multiline</a
+                  ></code
+                >
+              </td>
+            </tr>
+            <tr>
+              <td><code>s</code></td>
+              <td>Allows <code>.</code> to match newline characters.</td>
+              <td>
+                <code
+                  ><a
+                    href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/dotAll"
+                    >RegExp.prototype.dotAll</a
+                  ></code
+                >
+              </td>
+            </tr>
+            <tr>
+              <td><code>u</code></td>
+              <td>
+                "unicode"; treat a pattern as a sequence of unicode code points.
+              </td>
+              <td>
+                <code
+                  ><a
+                    href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/unicode"
+                    >RegExp.prototype.unicode</a
+                  ></code
+                >
+              </td>
+            </tr>
+            <tr>
+              <td><code>y</code></td>
+              <td>
+                Perform a "sticky" search that matches starting at the current
+                position in the target string. See&nbsp;<a
+                  href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/sticky"
+                  ><code>sticky</code></a
+                >.
+              </td>
+              <td>
+                <code
+                  ><a
+                    href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/sticky"
+                    >RegExp.prototype.sticky</a
+                  ></code
+                >
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <p>To include a flag with the regular expression, use this syntax:</p>
+        <code>var re = /pattern/flags;</code>
+        <p>or</p>
+        <code>var re = new RegExp('pattern', 'flags'); </code>
+        <p>
+          Note that the flags are an integral part of a regular expression. They
+          cannot be added or removed later. <br /><br />
+          For example, re = /\w+\s/g creates a regular expression that looks for
+          one or more characters followed by a space, and it looks for this
+          combination throughout the string.
+        </p>
+        <code
+          >var re = /\w+\s/g; var str = 'fee fi fo fum'; var myArray =
+          str.match(re); console.log(myArray); // ["fee ", "fi ", "fo "]</code
+        >
+        <p>You could replace the line:</p>
+        <code>var re = /\w+\s/g; </code>
+        <p>with:</p>
+        <code>var re = new RegExp('\\w+\\s', 'g'); </code>
+        <p>
+          and get the same result. The behavior associated with the g flag is
+          different when the .exec() method is used. The roles of "class" and
+          "argument" get reversed: In the case of .match(), the string class (or
+          data type) owns the method and the regular expression is just an
+          argument, while in the case of .exec(), it is the regular expression
+          that owns the method, with the string being the argument. Contrast
+          this str.match(re) versus re.exec(str). The g flag is used with the
+          .exec() method to get iterative progression.
+        </p>
+        <code
+          >var xArray; while(xArray = re.exec(str)) console.log(xArray); //
+          produces: // ["fee ", index: 0, input: "fee fi fo fum"] // ["fi ",
+          index: 4, input: "fee fi fo fum"] // ["fo ", index: 7, input: "fee fi
+          fo fum"]</code
+        >
+        <p>
+          The m flag is used to specify that a multiline input string should be
+          treated as multiple lines. If the m flag is used, ^ and $ match at the
+          start or end of any line within the input string instead of the start
+          or end of the entire string.
+        </p>
+      </section>
+      <section class="main-section" id="Examples">
+        <header><h2>Examples</h2></header>
+        <h3>Using special characters to verify input</h3>
+        <p>
+          In the following example, the user is expected to enter a phone
+          number. When the user presses the "Check" button, the script checks
+          the validity of the number. If the number is valid (matches the
+          character sequence specified by the regular expression), the script
+          shows a message thanking the user and confirming the number. If the
+          number is invalid, the script informs the user that the phone number
+          is not valid. <br /><br />
+          The regular expression looks for:
+        </p>
+        <ol type="1">
+          <li>
+            three numeric characters \d{3} OR | a left parenthesis \(, followed
+            by three digits \d{3}, followed by a close parenthesis \), in a
+            non-capturing group (?:)
+          </li>
+          <li>
+            followed by one dash, forward slash, or decimal point in a capturing
+            group ()
+          </li>
+          <li>followed by three digits \d{3}</li>
+          <li>
+            followed by the match remembered in the (first) captured group \1
+          </li>
+          <li>followed by four digits \d{4}</li>
+        </ol>
+        <p>
+          The Change event activated when the user presses Enter sets the value
+          of RegExp.input.
+        </p>
+      </section>
+      <section class="main-section" id="HTML">
+        <header><h2>HTML</h2></header>
+        <code
+          ><span class="token tag"
+            ><span class="token tag"
+              ><span class="token punctuation">&lt;</span>p</span
+            ><span class="token punctuation">&gt;</span></span
+          >
+          Enter your phone number (with area code) and then click "Check".
+          <span class="token tag"
+            ><span class="token tag"
+              ><span class="token punctuation">&lt;</span>br</span
+            ><span class="token punctuation">&gt;</span></span
+          >
+          The expected format is like ###-###-####.
+          <span class="token tag"
+            ><span class="token tag"
+              ><span class="token punctuation">&lt;/</span>p</span
+            ><span class="token punctuation">&gt;</span></span
+          >
+          <span class="token tag"
+            ><span class="token tag"
+              ><span class="token punctuation">&lt;</span>form</span
+            >
+            <span class="token attr-name">action</span
+            ><span class="token attr-value"
+              ><span class="token punctuation attr-equals">=</span
+              ><span class="token punctuation">"</span>#<span
+                class="token punctuation"
+                >"</span
+              ></span
+            ><span class="token punctuation">&gt;</span></span
+          >
+          <span class="token tag"
+            ><span class="token tag"
+              ><span class="token punctuation">&lt;</span>input</span
+            >
+            <span class="token attr-name">id</span
+            ><span class="token attr-value"
+              ><span class="token punctuation attr-equals">=</span
+              ><span class="token punctuation">"</span>phone<span
+                class="token punctuation"
+                >"</span
+              ></span
+            ><span class="token punctuation">&gt;</span></span
+          >
+          <span class="token tag"
+            ><span class="token tag"
+              ><span class="token punctuation">&lt;</span>button</span
+            >
+            <span class="token attr-name">onclick</span
+            ><span class="token attr-value"
+              ><span class="token punctuation attr-equals">=</span
+              ><span class="token punctuation">"</span
+              >testInfo(document.getElementById(<span class="token punctuation"
+                >'</span
+              >phone<span class="token punctuation">'</span>));<span
+                class="token punctuation"
+                >"</span
+              ></span
+            ><span class="token punctuation">&gt;</span></span
+          >Check<span class="token tag"
+            ><span class="token tag"
+              ><span class="token punctuation">&lt;/</span>button</span
+            ><span class="token punctuation">&gt;</span></span
+          >
+          <span class="token tag"
+            ><span class="token tag"
+              ><span class="token punctuation">&lt;/</span>form</span
+            ><span class="token punctuation">&gt;</span></span
+          ></code
+        >
+      </section>
+      <section class="main-section" id="JavaScript">
+        <header>
+          <h2>JavaScript</h2>
+        </header>
+        <code
+        >var re = /(?:\d{3}|\(\d{3}\))([-\/\.])\d{3}\1\d{4}/; function
+        testInfo(phoneInput) { var OK = re.exec(phoneInput.value); if (!OK) {
+        console.error(phoneInput.value + ' isn\'t a phone number with area
+        code!'); } else { console.log('Thanks, your phone number is ' + OK[0]);
+        } }
+      </code>
+      </section>
+
+    </main>
+  </body>
+</html>
